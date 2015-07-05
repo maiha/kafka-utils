@@ -20,6 +20,7 @@ class CountingConsumer(host: String, port: Int, topic: String, partition: Int) e
     using(newSimpleConsumer)(countingImpl)
   }
 
+  // derived from "kafka.tools.SimpleConsumerShell"
   private def countingImpl(consumer: SimpleConsumer): Long = {
     var numMessagesConsumed = 0
 
