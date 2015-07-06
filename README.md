@@ -74,8 +74,7 @@ TODO
 ====
 
 - write tests
-- api: count(topic: String, partition: Int): Int
-- api: counts(topic: String): Map[Int, Int]
+- consumers
 
 Library
 =======
