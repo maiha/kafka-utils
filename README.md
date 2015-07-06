@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/maiha/kafka-utils.svg?branch=master)](https://travis-ci.org/maiha/kafka-utils)
+
 # KafkaUtils
 
 Simple Kafka Utils in Scala
