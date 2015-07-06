@@ -21,6 +21,6 @@ private[utils] trait Api {
   def metadatas(topic: String, partition: Int): Try[TopicMetadataResponse]
 
   // TODO
-  //  def count(topic: String, partition: Int): Int
+  def count(topic: String, partition: Int): Long
   def counts(topic: String): Map[Int, Long]
 }
