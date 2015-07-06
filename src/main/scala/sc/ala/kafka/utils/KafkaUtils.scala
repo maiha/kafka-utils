@@ -55,6 +55,14 @@ abstract class KafkaUtils extends Api {
     throw new RuntimeException(s"metadata not found: ($topic, $partition)")
   }
 
+  def counts(topic: String): Map[Int, Long] = {
+    import scala.concurrent.ExecutionContext.Implicits.global
+    val sources = leaderBrokers(topic)  // Map(0 -> id:1,host:ubuntu,port:9092)
+    val fetches = sources.map { case (p, b) => Future { (p, new CountingConsumer(b.host, b.port, topic, p).count()) } }
+    val map = Future.sequence(fetches)
+    Await.result(map, 10.seconds).toMap
+  }
+
   def count(topic: String): Long = {
     import scala.concurrent.ExecutionContext.Implicits.global
     val sources = leaderBrokers(topic)  // Map(0 -> id:1,host:ubuntu,port:9092)

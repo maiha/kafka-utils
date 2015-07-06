@@ -73,8 +73,10 @@ private[utils] object Testing {
     println("counts()".green)
     utils{ u =>
       u.topics.foreach{ t =>
+        val sum = u.count(t)
+        val map = u.counts(t) //.filter(_._2 > 0)
         println(s"  -> $t:".green)
-        println(s"     ${u.count(t)}")
+        println(s"     ${sum} ($map)")
       }
     }
   }

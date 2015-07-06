@@ -22,5 +22,5 @@ private[utils] trait Api {
 
   // TODO
   //  def count(topic: String, partition: Int): Int
-  //  def counts(topic: String): Map[Int, Int]
+  def counts(topic: String): Map[Int, Long]
 }
