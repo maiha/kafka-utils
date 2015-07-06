@@ -44,7 +44,7 @@ pomExtra := (
 val kafkaVersion = "0.8.2.1"
 
 libraryDependencies ++= Seq(
-  "org.apache.kafka" %% "kafka" % kafkaVersion,
+  "org.apache.kafka" %% "kafka" % kafkaVersion exclude("junit", "junit"),
   "org.apache.kafka" % "kafka-clients" % kafkaVersion,
   "sc.ala" %% "rubyist" % "0.2.6",
   "pl.project13.scala" %% "rainbow" % "0.2" exclude("org.scalatest", "scalatest_2.11"),
