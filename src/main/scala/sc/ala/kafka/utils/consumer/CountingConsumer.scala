@@ -24,7 +24,7 @@ class CountingConsumer(host: String, port: Int, topic: String, partition: Int) e
   private def countingImpl(consumer: SimpleConsumer): Long = {
     var numMessagesConsumed = 0
 
-    val maxMessages = 100000
+    val maxMessages = 100000000
     val skipMessageOnError = true
     val replicaId = -1
 
