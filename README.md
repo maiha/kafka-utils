@@ -38,6 +38,12 @@ utils.topics
 
 ### about topic
 
+#### create topic
+
+```scala
+utils.create("topic1", 1, 3)
+```
+
 #### leader broker ids for the topic
 
 ```scala
@@ -52,6 +58,12 @@ utils.partitions("topic1")
 // Seq[Int] = ArrayBuffer(2, 1, 0)
 ```
 
+#### delete topic
+
+```scala
+utils.delete("topic1")
+```
+
 ### testing: very alpha functions
 
 #### count messages
@@ -62,12 +74,6 @@ utils.count("topic1")
 
 utils.counts("topic1")
 // Map(2 -> 0, 1 -> 5, 0 -> 0)
-```
-
-#### delete topic
-
-```scala
-utils.delete("topic1")
 ```
 
 ### teardown
@@ -85,4 +91,4 @@ TODO
 Library
 =======
 
-- kafka-0.8.2.x
+- kafka-0.9.0

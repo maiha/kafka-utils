@@ -41,7 +41,7 @@ pomExtra := (
       </scm>
 )
 
-val kafkaVersion = "0.8.2.1"
+val kafkaVersion = "0.9.0.0"
 
 libraryDependencies ++= Seq(
   "org.apache.kafka" %% "kafka" % kafkaVersion exclude("junit", "junit"),

@@ -1,13 +1,14 @@
 package sc.ala.kafka.utils.consumer
 
+import kafka.api._
 import kafka.utils._
 import kafka.consumer._
 import kafka.consumer.ConsumerConfig.{SocketTimeout, SocketBufferSize}
 import kafka.client.ClientUtils
-import kafka.api._
 import kafka.cluster.Broker
-import scala.collection.JavaConversions._
 import kafka.common.TopicAndPartition
+import scala.collection.JavaConversions._
+import org.apache.kafka.common.utils.Utils
 
 import sc.ala.rubyist.Using._
 import pl.project13.scala.rainbow._
