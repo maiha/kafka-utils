@@ -14,9 +14,10 @@ private[utils] trait Api {
   def leaders(topic: String): Map[Int, Option[Int]]
   def leaderBrokers(topic: String): Map[Int, Broker]
   def partitions(topic: String): Seq[Int]
+  def count(topic: String): Long
+  def delete(topic: String): Unit
 
   // testing (api is not fixed yet)
-  def count(topic: String): Long
   def metadata(topic: String): TopicMetadataResponse
   def metadatas(topic: String, partition: Int): Try[TopicMetadataResponse]
 

@@ -89,6 +89,10 @@ abstract class KafkaUtils extends Api {
 
   def count(topic: String): Long = counts(topic).values.sum
 
+  def delete(topic: String): Unit = {
+    AdminUtils.deleteTopic(zkClient, topic)
+  }
+
   def close(): Unit = zkClient.close()
 
   private def reservedTopicNames: Seq[String] = Seq(OffsetManager.OffsetsTopicName)

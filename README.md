@@ -64,6 +64,12 @@ utils.counts("topic1")
 // Map(2 -> 0, 1 -> 5, 0 -> 0)
 ```
 
+#### delete topic
+
+```scala
+utils.delete("topic1")
+```
+
 ### teardown
 
 ```scala
