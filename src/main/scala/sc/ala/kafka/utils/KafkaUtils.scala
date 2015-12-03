@@ -2,6 +2,7 @@ package sc.ala.kafka.utils
 
 import org.apache.zookeeper.ZooKeeper
 import org.I0Itec.zkclient.ZkClient
+import java.util.Properties
 import kafka.admin.AdminUtils
 import kafka.cluster.Broker
 import kafka.consumer._
@@ -88,6 +89,13 @@ abstract class KafkaUtils extends Api {
   }
 
   def count(topic: String): Long = counts(topic).values.sum
+
+  def create(
+    topic: String,
+    partitions: Int,
+    replicationFactor: Int,
+    topicConfig: Properties = new Properties
+  ) = AdminUtils.createTopic(zkClient, topic, partitions, replicationFactor, topicConfig)
 
   def delete(topic: String): Unit = {
     AdminUtils.deleteTopic(zkClient, topic)
