@@ -36,7 +36,6 @@ abstract class KafkaUtils extends Api {
   def leaderBrokers(topic: String): Map[Int, Broker] = {
     val resolve = brokers.groupBy(_.id).map{ case (k, list) => (k, list.head) }
     try {
-      println(s"ERROR: topic=$topic, leaders=${leaders(topic)}".red)
       leaders(topic).filter(_._2.isDefined).mapValues(_.map(resolve).get)
     } catch {
       case err: java.util.NoSuchElementException =>
