@@ -83,7 +83,29 @@ abstract class KafkaUtils extends Api {
     throw new RuntimeException(s"metadata not found: ($topic, $partition)")
   }
 
-  def count(topic: String, partition: Int): Long = {
+  def headOffsets(topic: String): Map[Int, Long] = broker.headOffsets(topic, partitions(topic))
+
+  def lastOffsets(topic: String): Map[Int, Long] = broker.lastOffsets(topic, partitions(topic))
+
+  def offset(topic: String): Long = offsets(topic).values.sum
+
+  def offsets(topic: String): Map[Int, Long] = lastOffsets(topic)
+
+  def counts(topic: String): Map[Int, Long] = {
+    var parts = partitions(topic)
+    assert(parts.size > 0, s"no partitions for topic($topic)")
+
+    val heads = broker.headOffsets(topic, parts)
+    val lasts = broker.lastOffsets(topic, parts)
+
+    parts.map{ p =>
+      val head = heads.getOrElse(p, throw new RuntimeException(s"no head offsets for counts($topic)(p=$p): $heads"))
+      val last = lasts.getOrElse(p, throw new RuntimeException(s"no last offsets for counts($topic)(p=$p): $lasts"))
+      p -> (last - head)
+    }.toMap
+  }
+
+  def reallyCount(topic: String, partition: Int): Long = {
     import scala.concurrent.ExecutionContext.Implicits.global
     leaderBrokers(topic).get(partition) match {
       case Some(b) =>
@@ -95,7 +117,7 @@ abstract class KafkaUtils extends Api {
     }
   }
 
-  def counts(topic: String): Map[Int, Long] = {
+  def reallyCounts(topic: String): Map[Int, Long] = {
     import scala.concurrent.ExecutionContext.Implicits.global
     val sources = leaderBrokers(topic)  // Map(0 -> id:1,host:ubuntu,port:9092)
     val fetches = sources.map { case (p, b) => Future {
@@ -117,10 +139,6 @@ abstract class KafkaUtils extends Api {
   def delete(topic: String): Unit = {
     AdminUtils.deleteTopic(zkUtils, topic)
   }
-
-  def offset(topic: String): Long = offsets(topic).values.sum
-
-  def offsets(topic: String): Map[Int, Long] = broker.offsets(topic, partitions(topic))
 
   def close(): Unit = zkClient.close()
 

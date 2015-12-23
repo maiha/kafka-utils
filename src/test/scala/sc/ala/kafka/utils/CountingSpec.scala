@@ -11,7 +11,6 @@ class CountingSpec extends TestHelper {
       onFirstTopic{ t => 
         utils.count(t)
         utils.counts(t)
-        utils.count(t, 0)
       }
     }
   }

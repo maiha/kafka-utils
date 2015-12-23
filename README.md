@@ -76,6 +76,15 @@ utils.counts("topic1")
 // Map(2 -> 0, 1 -> 5, 0 -> 0)
 ```
 
+#### list topics and counts
+
+```scala
+utils.topics.sorted.foreach{ t => println(s"${utils.count(t)}\t$t") }
+// 1       t1
+// 1534339 t2
+// 0       t3
+```
+
 #### offset
 
 

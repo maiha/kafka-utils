@@ -20,7 +20,6 @@ private[utils] trait Api {
   def leaderBrokers(topic: String): Map[Int, Broker]
   def partitions(topic: String): Seq[Int]
   def count(topic: String): Long
-  def count(topic: String, partition: Int): Long
   def counts(topic: String): Map[Int, Long]
   def create(topic: String, partitions: Int, replicationFactor: Int, topicConfig: Properties = new Properties): Unit
   def delete(topic: String): Unit
