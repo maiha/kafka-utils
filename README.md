@@ -64,8 +64,6 @@ utils.partitions("topic1")
 utils.delete("topic1")
 ```
 
-### testing: very alpha functions
-
 #### count messages
 
 ```scala
@@ -108,7 +106,8 @@ TODO
 - write tests
 - consumers
 
-Library
-=======
+Tested
+======
 
 - kafka-0.9.0
+- kafka-0.8.2

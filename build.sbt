@@ -20,7 +20,7 @@ publishTo := {
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
-version := "0.1.1"
+version := "0.2.0"
 organization := "sc.ala"
 name := "kafka-utils"
 description := "kafka utils"
