@@ -4,6 +4,7 @@ import org.scalatest._
 
 private[utils] trait TestHelper extends FunSpec {
   protected val zkConnect: String = "localhost:2181"
+
   protected def utils: KafkaUtils = KafkaUtils(zkConnect)
 
   protected def onFirstTopic[A](action: String => A): Unit = {

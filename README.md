@@ -76,6 +76,17 @@ utils.counts("topic1")
 // Map(2 -> 0, 1 -> 5, 0 -> 0)
 ```
 
+#### offset
+
+
+```scala
+utils.offset("topic1")
+// Long = 5
+
+utils.offsets("topic1")
+// Map[Int,Long] = Map(2 -> 0, 1 -> 0, 0 -> 3)
+```
+
 ### teardown
 
 ```scala

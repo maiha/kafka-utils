@@ -32,6 +32,10 @@ abstract class KafkaUtils extends Api {
 
   def topics: Seq[String] = zkUtils.getAllTopics().diff(reservedTopicNames)
 
+  def brokerConnectString: String = brokers.map(_.endPoints.head._2.connectionString).mkString(",")
+
+  lazy val broker: KafkaBrokerUtils = KafkaBrokerUtils(brokerConnectString)
+
   def leader(topic: String, partition: Int): Option[Int] = 
     zkUtils.getLeaderForPartition(topic, partition)
 
@@ -113,6 +117,10 @@ abstract class KafkaUtils extends Api {
   def delete(topic: String): Unit = {
     AdminUtils.deleteTopic(zkUtils, topic)
   }
+
+  def offset(topic: String): Long = offsets(topic).values.sum
+
+  def offsets(topic: String): Map[Int, Long] = broker.offsets(topic, partitions(topic))
 
   def close(): Unit = zkClient.close()
 
